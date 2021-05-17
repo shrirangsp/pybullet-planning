@@ -20,7 +20,7 @@ SLEEP = None # None | 0.05
 def test_base_motion(pr2, base_start, base_goal, obstacles=[]):
     #disabled_collisions = get_disabled_collisions(pr2)
     set_base_values(pr2, base_start)
-    wait_if_gui('Plan Base?')
+    wait_if_gui('Plan Base-pr2?')
     base_limits = ((-2.5, -2.5), (2.5, 2.5))
     with LockRenderer(lock=False):
         base_path = plan_base_motion(pr2, base_goal, base_limits, obstacles=obstacles)
@@ -45,7 +45,7 @@ def test_drake_base_motion(pr2, base_start, base_goal, obstacles=[]):
     set_joint_positions(pr2, base_joints, base_start)
     base_joints = base_joints[:2]
     base_goal = base_goal[:len(base_joints)]
-    wait_if_gui('Plan Base?')
+    wait_if_gui('Plan Base-drake?')
     with LockRenderer(lock=False):
         base_path = plan_joint_motion(pr2, base_joints, base_goal, obstacles=obstacles,
                                       disabled_collisions=disabled_collisions)
@@ -126,8 +126,8 @@ def main(use_pr2_drake=True):
         pr2 = load_model(pr2_urdf, fixed_base=True) # TODO: suppress warnings?
     dump_body(pr2)
 
-    base_start = (-2, -2, 0)
-    base_goal = (2, 2, 0)
+    base_start = (-4, -4, 0)
+    base_goal = (1, 2, 0)
     arm_start = SIDE_HOLDING_LEFT_ARM
     #arm_start = TOP_HOLDING_LEFT_ARM
     #arm_start = REST_LEFT_ARM
